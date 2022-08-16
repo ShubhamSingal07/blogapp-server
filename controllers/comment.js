@@ -12,7 +12,7 @@ const postComment = async (bodyData, articleId, userId) => {
 const fetchArticleComments = async articleId => {
   try {
     return await Comment.find({ articleId })
-      .populate({ path: 'authorId', select: { username: 1 } })
+      .populate({ path: 'authorId', select: { username: 1, _id: 0 } })
       .select({ text: 1, authorId: 1 })
       .sort({ createdAt: -1 })
       .lean();
